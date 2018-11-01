@@ -1,5 +1,8 @@
 document.addEventListener("deviceReady",createDatabase);
 document.getElementById("insertHeroes").addEventListener("click",insertHeroes);
+document.getElementById("showHeroes").addEventListener("click",showHeroes);
+document.getElementById("rescueMe").addEventListener("click",rescueMe);
+
 
 
 function insertHeroes() {
@@ -16,6 +19,58 @@ db.transaction(
     onError,
     onReadyTransaction
   )
+
+}
+
+function showHeroes(){
+
+  alert("show button pressed");
+document.getElementById("rescueMe").innerHTML = "";
+  db.transaction(
+		function(tx){
+			tx.executeSql( "SELECT * FROM heroes",
+			[],
+			displayResults,
+			onError )
+		},
+		onError,
+		onReadyTransaction
+	)
+}
+
+
+
+function displayResults( tx, results ){
+
+		if(results.rows.length == 0) {
+			alert("No records found");
+			return false;
+		}
+
+		var row = "";
+		for(var i=0; i<results.rows.length; i++) {
+
+			document.getElementById("showResults").innerHTML +=
+       "<p>name: "
+        +results.rows.item(i).name
+        +"<br>"
+        +"Available To Hire: "
+        +results.rows.item(i).isAvailable;
+
+if(results.rows.item(i).isAvailable == 1) {
+  var a = "Yes";
+  var b = "No";
+} else {
+
+}
+
+		}
+  	}
+
+
+
+
+function rescueMe() {
 
 }
 
