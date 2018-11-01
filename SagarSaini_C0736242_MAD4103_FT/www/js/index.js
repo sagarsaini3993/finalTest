@@ -1,6 +1,7 @@
 document.addEventListener("deviceReady",createDatabase);
 document.getElementById("insertHeroes").addEventListener("click",insertHeroes);
 document.getElementById("showHeroes").addEventListener("click",showHeroes);
+// document.getElementById("rescueMe").addEventListener("click",rescueMe);
 document.getElementById("rescueMe").addEventListener("click",rescueMe);
 
 
@@ -14,11 +15,13 @@ function rescueMe() {
 function insertHeroes() {
 alert("insert heroes clicked");
 
+var n = document.getElementById("name").value;
+var a = document.getElementById("available").value;
+
 db.transaction(
     function(tx){
       tx.executeSql( "INSERT INTO heroes(name,isAvailable) VALUES(?,?)",
-      ["Spiderman",1],
-      ["Thor",1],
+      [n,a],
       onSuccessExecuteSql,
       onError )
     },
@@ -31,7 +34,7 @@ db.transaction(
 function showHeroes(){
 
   alert("show button pressed");
-document.getElementById("rescueMe").innerHTML = "";
+document.getElementById("showResults").innerHTML = "";
   db.transaction(
 		function(tx){
 			tx.executeSql( "SELECT * FROM heroes",
@@ -56,12 +59,12 @@ function displayResults( tx, results ){
 		var row = "";
 		for(var i=0; i<results.rows.length; i++) {
 
-      if(results.rows.item(i).isAvailable == 1) {
-        var a = "Yes";
-        var b = "No";
-      } else {
-
-      }
+      // if(results.rows.item(i).isAvailable == 1) {
+      //   var a = "Yes";
+      //   var b = "No";
+      // } else {
+      //
+      // }
 
 
 			document.getElementById("showResults").innerHTML +=
@@ -69,8 +72,8 @@ function displayResults( tx, results ){
         +results.rows.item(i).name
         +"<br>"
         +"Available To Hire: "
-        // +results.rows.item(i).isAvailable
-        +a;
+        +results.rows.item(i).isAvailable
+        // +a;
         ;
 
 
@@ -80,10 +83,6 @@ function displayResults( tx, results ){
 
 
 
-
-function rescueMe() {
-
-}
 
 
 
