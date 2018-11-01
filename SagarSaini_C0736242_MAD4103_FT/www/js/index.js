@@ -59,22 +59,41 @@ function displayResults( tx, results ){
 		var row = "";
 		for(var i=0; i<results.rows.length; i++) {
 
-      // if(results.rows.item(i).isAvailable == 1) {
-      //   var a = "Yes";
-      //   var b = "No";
-      // } else {
-      //
-      // }
+      if(results.rows.item(i).isAvailable == 1) {
+        var a = "Yes";
+        var b = "No";
 
 
-			document.getElementById("showResults").innerHTML +=
-       "<p>name: "
-        +results.rows.item(i).name
-        +"<br>"
-        +"Available To Hire: "
-        +results.rows.item(i).isAvailable
-        // +a;
-        ;
+        document.getElementById("showResults").innerHTML +=
+         "<p>name: "
+          +results.rows.item(i).name
+          +"<br>"
+          +"Available To Hire: "
+          +"Yes"
+
+          ;
+
+
+      } else {
+        document.getElementById("showResults").innerHTML +=
+         "<p>name: "
+          +results.rows.item(i).name
+          +"<br>"
+          +"Available To Hire: "
+          +"No"
+          // +a;
+          ;
+      }
+
+
+			// document.getElementById("showResults").innerHTML +=
+      //  "<p>name: "
+      //   +results.rows.item(i).name
+      //   +"<br>"
+      //   +"Available To Hire: "
+      //   +results.rows.item(i).isAvailable
+      //   // +a;
+      //   ;
 
 
 
