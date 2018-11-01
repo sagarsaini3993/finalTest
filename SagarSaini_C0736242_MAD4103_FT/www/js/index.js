@@ -1,4 +1,28 @@
 document.addEventListener("deviceReady",createDatabase);
+document.getElementById("insertHeroes").addEventListener("click",insertHeroes);
+document.getElementById("showHeroes").addEventListener("click",showHeroes);
+
+
+function insertHeroes() {
+alert("insert heroes clicked");
+
+db.transaction(
+    function(tx){
+      tx.executeSql( "INSERT INTO heroes(name,isAvailable) VALUES(?,?)",
+      ["Spiderman",1],
+      ["Thor",1],
+      onSuccessExecuteSql,
+      onError )
+    },
+    onError,
+    onReadyTransaction
+  )
+
+}
+
+
+
+
 
 
 function createDatabase() {
